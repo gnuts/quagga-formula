@@ -1,0 +1,16 @@
+password zebra
+log file {{ logdir }}/ripd.log
+!
+debug rip events
+debug rip packet
+!
+{%- for router in ripd.routers %}
+router rip
+network {{ router.network }}
+network {{ router.interface }}
+passive-interface default
+!
+{%- endfor %}
+
+line vty
+!
