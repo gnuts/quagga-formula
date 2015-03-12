@@ -1,6 +1,6 @@
 {% set map = salt['grains.filter_by']({
   'Debian': {
-    'pkgs': [ 'conntrackd', 'conntrack' ],
+    'pkgs': [ 'quagga' ],
     'servicename': 'quagga',
     'confdir': '/etc/quagga',
     'debian' : True,

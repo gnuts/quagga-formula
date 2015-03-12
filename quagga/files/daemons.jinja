@@ -1,12 +1,12 @@
 zebra=yes
-{%- if bgpd is defined %}
+{%- if bgpd %}
 bgpd=yes
 {%- else %}
 bgpd=no
 {%- endif %}
 ospfd=no
 ospf6d=no
-{%- if ripd is defined %}
+{%- if ripd %}
 ripd=yes
 {%- else %}
 ripd=no

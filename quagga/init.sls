@@ -1,9 +1,10 @@
 {% from "quagga/map.jinja" import map with context %}                                                                                                           
 
 
-{% set bgpd = pillar.get('quagga:bgpd', None) %}
-{% set ripd = pillar.get('quagga:ripd', None) %}
-{% set zebra = pillar.get('quagga:zebra', None) %}
+{% set quagga = pillar.get('quagga', {}) %}
+{% set bgpd   = quagga.get('bgpd', False) %}
+{% set ripd   = quagga.get('ripd', False) %}
+{% set zebra  = quagga.get('zebra', False) %}
 
 quagga_packages:                                                                                                                                                
   pkg.installed:                                                                                                                                                   
@@ -24,7 +25,7 @@ quagga_daemons:
       bgpd:  {{ bgpd }}
       ripd:  {{ ripd }}
 
-{% if ripd is defined %}
+{% if ripd %}
 quagga_ripdconf:
   file.managed:
     - name: /etc/quagga/ripd.conf
@@ -38,7 +39,7 @@ quagga_ripdconf:
       logdir: {{ map.logdir }}
 {% endif %}
 
-{% if bgpd is defined %}
+{% if bgpd %}
 quagga_bgpdconf:
   file.managed:
     - name: {{ map.confdir }}/bgpd.conf
@@ -60,7 +61,7 @@ quagga_bgpdconf:
 
 {% endif %}
 
-{% if zebra is defined %}
+{% if zebra %}
 quagga_zebraconf:
   file.managed:
     - name: {{ map.confdir }}/zebra.conf

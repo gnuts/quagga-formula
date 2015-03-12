@@ -1,7 +1,6 @@
-{{ set routers = bgpd.get('routers',[]) }}
-{{ set allowlist = bgpd.get('allowlist',[]) }}
-{{ set neighbours = bgpd.get('neighbours',[]) }}
-
+{%- set routers    = bgpd.get('routers',[]) %}
+{%- set allowlist  = bgpd.get('allowlist',[]) %}
+{%- set neighbours = bgpd.get('neighbours',[]) %}
 password zebra
 hostname {{ grains.nodename }}.bgpd
 log file {{ logdir }}/bgpd.log
